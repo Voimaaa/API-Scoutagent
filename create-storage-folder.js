@@ -1,19 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 
-const folderName = process.argv[2];
-const folderPath = path.join("/storage", folderName + "_storage");
-const filePath = path.join(folderPath, "email.txt");  // ← DATEI im Ordner!
+const email = process.argv[2];
+const folderPath = path.join("/storage", email + "_storage");
+const filePath = path.join(folderPath, "email.txt");  
 
 if (!fs.existsSync(folderPath)) {
     fs.mkdirSync(folderPath, { recursive: true });
-    console.log('🆕 Ordner erstellt!');
+    console.log("Storage-Folder für neuen Benutzer wurde angelegt! Folder: " + folderPath);
 }
 
-// IMMER Datei schreiben (egal ob Ordner neu/existiert)
-fs.writeFileSync(filePath, "Das ist meine Email!");
-console.log('✅ Datei geschrieben:', filePath);
+if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, email);
+    console.log('E-Mail wurde gespeichert! Speicher-Ort: ' + filePath);
+}
 
-// Datei lesen
 let emailContent = fs.readFileSync(filePath, 'utf8');
-console.log('📄 Inhalt:', emailContent);
+console.log('Email des Benutzers lautet wie folgt: ' + emailContent);
