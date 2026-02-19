@@ -2,8 +2,10 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/UserEmail', (req, res) => {
+    const email = req.query.email;
+    res.json({ email });
+    console.log("Folgende Email vom User wurde erhalten: " + email);
 })
 
 app.listen(port, () => {
