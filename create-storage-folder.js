@@ -7,6 +7,12 @@ const folderPath = path.join("/storage", folderName + "_storage");
 
 if (fs.existsSync(folderPath)) {
     console.log('✅ Ordner "' + folderName + '" existiert bereits!');
+
+    fs.writeFileSync(folderPath, "Das ist meine Email!");
+    console.log("File wurde in den ordner geschrieben!");
+
+    let writteEmail = fs.readFileSync(folderPath);
+    console.log(writteEmail);
 } else {
     fs.mkdirSync(folderPath);
     console.log('🆕 Ordner "' + folderName + '" wurde erstellt!');
